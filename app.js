@@ -55,30 +55,3 @@ const PORT = process.env.PORT || 4080
 app.listen(PORT,()=>{
   console.log(`Listening on port ${PORT}`)
 })
-
-// async function makeRequest()
-// {
-//     const URL = 'https://api.twitter.com/2/users/by/username/:ose4g1';
-//     const TOKEN = 'Bearer AAAAAAAAAAAAAAAAAAAAAIn6VwEAAAAAVh1PZAn%2F7j5kb0UmQih1v%2BaOGGs%3D87hlr6kZh8XJ1ZEti1q10Ez6KMutMLh36cgaUkReT3NiJ0VKev'
-
-//     try {
-//         console.log('is memeber valid')
-//         const response = await axios({
-//           method: GET,
-//           url: URL,
-//           headers: {
-//             Authorization: TOKEN
-//           }
-//         })
-// ;
-//        console.log(response.data)
-//       } 
-//       catch (error) {
-//        if(error.response)
-//         console.log(error.response.data, 'status = ', error.response.status)
-//       else
-//         console.log(error);
-//       }
-// }
-
-// makeRequest();
