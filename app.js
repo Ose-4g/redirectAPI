@@ -50,9 +50,9 @@ app.route('/')
 .patch(handler(PATCH))
 .delete(handler(DELETE))
 
-
-app.listen(4080,()=>{
-  console.log('Listening on port 4080')
+const PORT = process.env.PORT || 4080
+app.listen(PORT,()=>{
+  console.log(`Listening on port ${PORT}`)
 })
 
 // async function makeRequest()
