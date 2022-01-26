@@ -1,0 +1,29 @@
+{
+  "name": "redirectAPI",
+  "version": "1.0.0",
+  "description": "Redirects you to another API endpoint",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ose-4g/redirectAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ose-4g/redirectAPI/issues"
+  },
+  "homepage": "https://github.com/Ose-4g/redirectAPI#readme",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
