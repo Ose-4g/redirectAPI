@@ -62,7 +62,7 @@ app.route('/')
 
   try {
     const response = await axios({
-      method: verb,
+      method: GET,
       url,
       data:body,
       headers: {
