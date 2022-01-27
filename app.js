@@ -1,95 +1,56 @@
 const express = require('express')
 const cors = require('cors')
 const axios = require('axios')
+const multer = require('multer')
+
+const upload = multer()
+const get = require('./axios-requests/get')
+
 
 const app = express();
 
-app.use(cors());
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-//app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 const PUT = 'put', POST = 'post', GET = 'get', PATCH = 'patch', DELETE = 'delete'
 
-const handler = (verb)=>{
-    return async (req,res,next)=>{
-      console.log("body",req.body)
-      console.log(verb)
-      const {url,Authorization,body} = req.body
 
-      console.log('body',url)
-      console.log('authorization',Authorization)
-      console.log('body',body)
 
-      try {
-        const response = await axios({
-          method: verb,
-          url,
-          data:body,
-          headers: {
-            Authorization
-          }
-        })
-;
+
+
+app.post('/',async (req,res,next)=>{
+  let {method} = req.body
+  method = String(method).toLowerCase()
+
+  if(!method || (method != POST && method != PUT && method != PATCH && method != DELETE && method != GET))
+    res.status(400).json({message: 'invalid method'})
+  
+    const {url,Authorization,body} = req.body
+
+
+
+    if(method===GET)
+    {
+      try{
+        const response = await get(url,Authorization)
         res.status(200).json(response.data)
-      } 
-      catch (error) {
-        if(error.response)
-        {
-          res.status(error.response.status).json(error.response.data)
-        }
-          
+      }
+      catch(err)
+      {
+        if(err.response)
+          res.status(400).json(err.response.data)
         else
-        {
-          console.log(error)
-          res.status(500).json({message: 'something went very wrong'});
-        }
+          res.status(500).json({message: 'something went very wrong'})
         
       }
     }
-}
-
-
-
-app.route('/')
-.get(async (req,res)=>{
-  console.log("body",req.body)
-  console.log(GET)
-  const {url,Authorization,body} = req.body
-
-  console.log('body',url)
-  console.log('authorization',Authorization)
-  console.log('body',body)
-
-  try {
-    const response = await axios({
-      method: GET,
-      url,
-      data:body,
-      headers: {
-        Authorization
-      }
-    })
-;
-    res.status(200).json(response.data)
-  } 
-  catch (error) {
-    if(error.response)
-    {
-      res.status(error.response.status).json(error.response.data)
-    }
-      
-    else
-    {
-      console.log(error)
-      res.status(500).json({message: 'something went very wrong'});
-    }
-    
-  }
 })
-.post(handler(POST))
-.put(handler(PUT))
-.patch(handler(PATCH))
-.delete(handler(DELETE))
+
+app.all('*',(req,res)=>{
+  res.status(404).json({message:'this endpoint does not exist on the server'})
+})
 
 const PORT = process.env.PORT || 4080
 app.listen(PORT,()=>{
