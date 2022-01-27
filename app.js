@@ -39,15 +39,15 @@ app.post('/',async (req,res,next)=>{
     {
       try{
         const response = await get(url,Authorization)
-        res.status(200).json(response.data)
+        res.status(response.status).json(response.data)
       }
       catch(err)
       {
+        console.log(err)
         if(err.response)
-          res.status(400).json(err.response.data)
+          res.status(err.response.status).json(err.response.data)
         else
           res.status(500).json({message: 'something went very wrong'})
-        
       }
     }
 
@@ -55,12 +55,12 @@ app.post('/',async (req,res,next)=>{
     {
       try{
         const response = await post(url,Authorization,body)
-        res.status(200).json(response.data)
+        res.status(response.status).json(response.data)
       }
       catch(err)
       {
         if(err.response)
-          res.status(400).json(err.response.data)
+          res.status(err.response.status).json(err.response.data)
         else
           res.status(500).json({message: 'something went very wrong'})
         
@@ -71,12 +71,12 @@ app.post('/',async (req,res,next)=>{
     {
       try{
         const response = await put(url,Authorization,body)
-        res.status(200).json(response.data)
+        res.status(response.status).json(response.data)
       }
       catch(err)
       {
         if(err.response)
-          res.status(400).json(err.response.data)
+          res.status(err.response.status).json(err.response.data)
         else
           res.status(500).json({message: 'something went very wrong'})
         
@@ -87,12 +87,12 @@ app.post('/',async (req,res,next)=>{
     {
       try{
         const response = await patch(url,Authorization,body)
-        res.status(200).json(response.data)
+        res.status(response.status).json(response.data)
       }
       catch(err)
       {
         if(err.response)
-          res.status(400).json(err.response.data)
+          res.status(err.response.status).json(err.response.data)
         else
           res.status(500).json({message: 'something went very wrong'})
         
@@ -103,12 +103,12 @@ app.post('/',async (req,res,next)=>{
     {
       try{
         const response = await _delete(url,Authorization)
-        res.status(200).json(response.data)
+        res.status(response.status).json(response.data)
       }
       catch(err)
       {
         if(err.response)
-          res.status(400).json(err.response.data)
+          res.status(err.response.status).json(err.response.data)
         else
           res.status(500).json({message: 'something went very wrong'})
         
