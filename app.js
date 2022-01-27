@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const PUT = 'put', POST = 'post', GET = 'get', PATCH = 'patch', DELETE = 'delete'
 
-const handler = async (verb)=>{
+const handler = (verb)=>{
     return async (req,res,next)=>{
       console.log(req.body)
       const {url,Authorization,body} = req.body
