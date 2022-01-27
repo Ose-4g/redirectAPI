@@ -12,7 +12,7 @@ const PUT = 'put', POST = 'post', GET = 'get', PATCH = 'patch', DELETE = 'delete
 
 const handler = (verb)=>{
     return async (req,res,next)=>{
-      console.log(body,req.body)
+      console.log("body",req.body)
       console.log(verb)
       const {url,Authorization,body} = req.body
 
