@@ -51,7 +51,41 @@ const handler = (verb)=>{
 
 
 app.route('/')
-.get(handler(GET))
+.get(async (req,res,next)=>{
+  console.log("body",req.body)
+  console.log(GET)
+  const {url,Authorization,body} = req.body
+
+  console.log('body',url)
+  console.log('authorization',Authorization)
+  console.log('body',body)
+
+  try {
+    const response = await axios({
+      method: verb,
+      url,
+      data:body,
+      headers: {
+        Authorization
+      }
+    })
+;
+    res.status(200).json(response.data)
+  } 
+  catch (error) {
+    if(error.response)
+    {
+      res.status(error.response.status).json(error.response.data)
+    }
+      
+    else
+    {
+      console.log(error)
+      res.status(500).json({message: 'something went very wrong'});
+    }
+    
+  }
+})
 .post(handler(POST))
 .put(handler(PUT))
 .patch(handler(PATCH))
