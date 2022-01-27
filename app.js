@@ -51,7 +51,7 @@ const handler = (verb)=>{
 
 
 app.route('/')
-.get(async (req,res,next)=>{
+.get(async (req,res)=>{
   console.log("body",req.body)
   console.log(GET)
   const {url,Authorization,body} = req.body
